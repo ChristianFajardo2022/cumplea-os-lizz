@@ -1,0 +1,33 @@
+/* confetti.css */
+@keyframes confetti-fall {
+  0% { transform: translateY(-100%); opacity: 1; }
+  50% { opacity: 1; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+
+.confetti {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: confetti-fall linear infinite;
+}
+
+.confetti:nth-child(1) { background-color: #F00; }
+.confetti:nth-child(2) { background-color: #0F0; }
+.confetti:nth-child(3) { background-color: #00F; }
+.confetti:nth-child(4) { background-color: #FF0; }
+.confetti:nth-child(5) { background-color: #0FF; }
+.confetti:nth-child(6) { background-color: #F0F; }
+.confetti:nth-child(7) { background-color: #F90; }
+.confetti:nth-child(8) { background-color: #0F9; }
+.confetti:nth-child(9) { background-color: #F6F; }
+.confetti:nth-child(10) { background-color: #F4F; }
+
+@media (max-width: 600px) {
+  .confetti {
+    width: 4px;
+    height: 4px;
+  }
+}

@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+    @apply h-screen;
+}
+.text-border {
+    text-shadow: 
+      -1px -1px 0 #000,  
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000;
+      
+  }
+  
+  .text-shadow {
+    text-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5);
+  }
+/* styles.css */
+.card-container {
+    perspective: 1000px;
+  }
+  
+  .card {
+    width: 18rem; /* Ajusta el tamaño según sea necesario */
+    height: 20rem;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+  }
+  
+  .card:hover {
+    transform: rotateY(180deg);
+  }
+  
+  .card-inner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+  }
+  
+  .card-front,
+  .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+  }
+  
+  .card-front {
+    background: #C1FF72; /* Color de fondo de la cara frontal */
+  }
+  
+  .card-back {
+    background: #C1FF72; /* Color de fondo de la cara trasera */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    transform: rotateY(180deg);
+    border-radius: 10px;
+  }
+  
+  .card-back button {
+    margin: 0.5rem ;
+  }
+  
+  .card-back button:first-child {
+    background-color: #4CAF50;
+  }
+  
+  .card-back button:first-child:hover {
+    background-color: #45a049;
+  }
+  
+  .card-back button:last-child {
+    background-color: #2196F3;
+  }
+  
+  .card-back button:last-child:hover {
+    background-color: #0b7dda;
+  }
+  
