@@ -26,6 +26,7 @@ function Video1({ onEnded }) {
         src="video1.mp4" // Reemplaza con la ruta correcta del primer video
         className="w-auto h-full object-cover"
         playsInline
+        autoPlay
       />
     </div>
   );
