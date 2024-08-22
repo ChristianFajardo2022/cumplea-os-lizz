@@ -2,9 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  @font-face {
+    font-family: "Metamasie";
+    font-style: bold;
+    src: url("./Matemasie-Regular.ttf");
+  }
+  @font-face {
+    font-family: "Helvetica";
+    font-style: bold;
+    src: url("./helvetica-neue-bold.ttf");
+  }
+
+}
+.Helvetica{
+  font-family: "Helvetica";
+}
 
 :root {
     @apply h-screen;
+    font-family: "Metamasie";
+  
 }
 .text-border {
     text-shadow: 
@@ -52,11 +70,11 @@
   }
   
   .card-front {
-    background: #C1FF72; /* Color de fondo de la cara frontal */
+    background: #f4f4f4; /* Color de fondo de la cara frontal */
   }
   
   .card-back {
-    background: #C1FF72; /* Color de fondo de la cara trasera */
+    background: #7287ff; /* Color de fondo de la cara trasera */
     display: flex;
     align-items: center;
     justify-content: center;

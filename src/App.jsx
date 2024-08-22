@@ -16,11 +16,11 @@ function App() {
 
   return (
     <div className='relative bg-cover' style={{ backgroundImage: 'url(./fondo.png)' }}>
-      <div className="w-full h-screen overflow-hidden bg-cover">
+      <div className="w-full h-screen overflow-hidden">
         {showVideo1 ? <Video1 onEnded={handleVideo1End} /> : <Video2 />}
         {showConfetti && (
           <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-            {Array.from({ length: 500 }).map((_, index) => (
+            {Array.from({ length: 700 }).map((_, index) => (
               <div key={index} className="confetti" style={{
                 top: `${Math.random() * 100}%`,
                 left: `${Math.random() * 100}%`,
