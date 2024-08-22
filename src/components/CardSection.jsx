@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { db, addDoc, collection } from '../../firebase'; // Importa las funciones de Firebase
 
 function CardsSection() {
   const cards = [
@@ -6,14 +7,27 @@ function CardsSection() {
     { id: 2, image: 'pueblito.jpg', text: 'Pueblear con Fotos Ilimitadas y sin Renegar', description: 'Explora los pintorescos pueblos y captura momentos inolvidables sin preocupaciones, con tu fotografo de cabecera y sin renegar de las mil fotos jajaja 🤣 ' },
     { id: 3, image: 'cena.jpg', text: 'Cena en tu Restaurante Favorito', description: 'Deléitate con una cena exquisita en tu restaurante preferido, ¡a cargo de la casa! 😜' },
     { id: 4, image: 'cepeda.jpg', text: 'Concierto al que Quieras Ir', description: 'Asiste a un concierto de tu elección y vive una experiencia musical inolvidable. 🤳 🎶' },
-    { id: 5, image: 'sorpresa.jpg', text: 'Actividad Sorpresa "yo Elijo"', description: 'Déjate sorprender con una actividad especial seleccionada especialmente para ti, (aun que tu sabes ya cual escogeria yo jajaja). 😎' },
-    { id: 6, image: 'comedy.jpg', text: 'Tú Show de Comedia Favorito', description: 'Disfruta de una noche innolvidable en el show de comedia que siempre hayas querido ver. 😁' },
+    { id: 5, image: 'sorpresa.jpg', text: 'Actividad Sorpresa "yo Elijo"', description: 'Déjate sorprender con una actividad especial seleccionada especialmente para ti, (aunque tú ya sabes cual escogería yo jajaja). 😎' },
+    { id: 6, image: 'comedy.jpg', text: 'Tu Show de Comedia Favorito', description: 'Disfruta de una noche innolvidable en el show de comedia que siempre hayas querido ver. 😁' },
   ];
 
   const [selectedCard, setSelectedCard] = useState(null);
+  const [showCongratulations, setShowCongratulations] = useState(false);
 
   const handleDetailsClick = (card) => {
     setSelectedCard(card);
+  };
+
+  const handleSelectClick = async (card) => {
+    try {
+      await addDoc(collection(db, 'selecciones'), {
+        ...card,
+        selectedAt: new Date(),
+      });
+      setShowCongratulations(true);
+    } catch (e) {
+      console.error("Error al guardar la selección: ", e);
+    }
   };
 
   const closeModal = () => {
@@ -47,7 +61,10 @@ function CardsSection() {
                   >
                     Detalles
                   </button>
-                  <button className="w-1/2 py-2 px-4 rounded-lg bg-green-500 text-white hover:bg-green-600 transition-colors">
+                  <button
+                    className="w-1/2 py-2 px-4 rounded-lg bg-green-500 text-white hover:bg-green-600 transition-colors"
+                    onClick={() => handleSelectClick(card)}
+                  >
                     Seleccionar
                   </button>
                 </div>
@@ -76,21 +93,36 @@ function CardsSection() {
           </div>
         </div>
       )}
-      <div className=' flex flex-col items-center w-full'>
-      <h1 className=' text-center w-1/2 text-[#885fff] text-2xl'>
 
-Hoy brillan las estrellas con más intensidad,
-El sol te envía un rayo de felicidad,
-Las flores susurran un dulce cantar,
-Porque hoy es tu día, ¡vamos a celebrar!
+      {showCongratulations && (
+        <div className="fixed inset-0 flex Helvetica items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
+            <h2 className="text-2xl font-semibold mb-4 text-green-600">¡Felicitaciones Lizz!</h2>
+            <p className="text-gray-700">Haz escogido un lindo plan.</p>
+            <button
+              className="mt-4 w-full py-2 px-4 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition-colors"
+              onClick={() => setShowCongratulations(false)}
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+      )}
 
-Que cada segundo esté lleno de amor,
-Que la vida te regale su mejor color,
-Risas, abrazos y sueños por cumplir,
-Hoy y siempre, ¡te deseo lo mejor por vivir!</h1>
-<h1 className=' text-5xl text-red-500 mt-3 text-center'>Con Cariño <br/> Chris!</h1>
-
-
+      <div className='flex flex-col items-center w-full'>
+        <h1 className='text-center w-1/2 text-[#885fff] text-2xl'>
+          Hoy brillan las estrellas con más intensidad,  
+          El sol te envía un rayo de felicidad,  
+          Las flores susurran un dulce cantar,  
+          Porque hoy es tu día, ¡vamos a celebrar!
+          Que cada segundo esté lleno de amor,  
+          Que la vida te regale su mejor color,  
+          Risas, abrazos y sueños por cumplir,  
+          Hoy y siempre, ¡te deseo lo mejor por vivir!
+        </h1>
+        <h1 className='text-5xl text-red-500 mt-3 text-center'>
+          Con Cariño <br/> Chris!
+        </h1>
       </div>
     </div>
   );
